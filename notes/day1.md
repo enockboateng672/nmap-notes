@@ -1,27 +1,36 @@
-## Day 1 - Nmap Basics
+# Day 1 - Learning Nmap
 
-## Objective
-To understand how to use Nmap to discover open ports and identify services running on a system.
+Today I practiced using Nmap to scan my own machine (127.0.0.1) to understand how port scanning works.
 
-## Commands Used
+## What I did
+I ran:
 - nmap 127.0.0.1
 - nmap -sV 127.0.0.1
 - nmap -p- 127.0.0.1
 
-## Explanation of Commands
-- Basic scan (nmap): Identifies open ports on the target system.
-- -sV: Detects the version of services running on open ports.
-- -p-: Scans all 65535 ports instead of the default top ports.
+## What I found
+All the ports I scanned were closed.
 
-## Observations and Analysis
-- Port 22 is open and running SSH, which allows remote access to the system. This can be a target for brute-force attacks or exploitation if weak credentials or vulnerabilities exist.
-- Port 80 is open and running HTTP, meaning a web server is active. This could expose web applications that may be vulnerable to attacks such as SQL injection or cross-site scripting (XSS).
+- The basic scan checked 1000 common ports → all closed
+- The full scan checked all 65535 ports → all closed
+- No services were detected
 
-## Key Takeaways
-- Open ports represent possible entry points into a system.
-- Service detection helps identify what is running behind each port.
-- Full port scanning can reveal services that are not found in default scans.
+## What this means
+Since all ports are closed, there are no services running on my machine that are accessible over the network.
 
-## Next Steps
-- Learn how to identify vulnerabilities in detected services.
-- Practice scanning other machines in a controlled lab environment.
+This means:
+- No entry points for network attacks
+- The system has a very small attack surface
+
+## What I learned
+- Nmap is used to discover open ports and services
+- Open ports = possible entry points
+- Closed ports = nothing is listening
+- The -sV flag only works when ports are open
+- The -p- flag is useful to check all ports, not just common ones
+
+## My thoughts
+At first I expected to see open ports like SSH or HTTP, but my system had none. This showed me that scanning localhost is safe but not always useful for finding vulnerabilities.
+
+## Next step
+I need to scan a real machine with active services to see meaningful results.
